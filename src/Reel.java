@@ -13,21 +13,29 @@ public class Reel {
 
         int count = paths.size();
 
-        while (count > 1) {
+        while (count > 0) {
 
             int no = (int) (Math.random() * 10 % 6);
 
-            if (values.get(no) != -1) {
+            if (!isInTheArray(values.get(no))) {
                 symbols.add(new Symbol());
                 symbols.get(symbols.size() - 1).setImage(paths.get(no));
                 symbols.get(symbols.size() - 1).setValue(values.get(no));
-                values.set(no, -1);
                 count--;
-                System.out.println(count);
+                //System.out.println(count);
             }
         }
 
 
+    }
+
+    boolean isInTheArray(int num){
+        for(Symbol s : symbols){
+            if (s.value==num){
+                return true;
+            }
+        }
+        return false;
     }
 
     ArrayList<Symbol> spin() {

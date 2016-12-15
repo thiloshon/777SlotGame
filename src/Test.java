@@ -47,6 +47,7 @@ public class Test {
             ArrayList<String> paths = new ArrayList<>();
             ArrayList<Integer> values = new ArrayList<>();
 
+
             paths.add("sources/images/bell.png");
             paths.add("sources/images/cherry.png");
             paths.add("sources/images/lemon.png");
@@ -89,7 +90,7 @@ public class Test {
             gt.gridwidth = 2;
             gt.insets = new Insets(4, 4, 4, 4);
 
-            spinThread th = new spinThread(c1, gt, reel, this);
+            spinnableThread th = new spinnableThread(c1, gt, reel, this);
             th.start();
 
             gbc.gridx++;
@@ -186,13 +187,13 @@ public class Test {
 
     }
 
-    class spinThread extends Thread{
+    class spinnableThread extends Thread{
         JLabel jlabel;
         GridBagConstraints gbc;
         ArrayList<Symbol> reel;
         TestPane ts;
 
-        public spinThread(JLabel jlabel, GridBagConstraints gbc, ArrayList<Symbol> reel, TestPane ts) {
+        public spinnableThread(JLabel jlabel, GridBagConstraints gbc, ArrayList<Symbol> reel, TestPane ts) {
             this.gbc = gbc;
             this.jlabel = jlabel;
             this.reel = reel;
