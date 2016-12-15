@@ -36,7 +36,7 @@ public class Reel {
         int no = (int) (Math.random() * 10 % 6);
 
         for (int x = 0; x < symbols.size(); x++) {
-            no = no % 6;
+            no = no % 5;
             returnArray.add(symbols.get(no));
             no++;
         }
