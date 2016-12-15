@@ -65,9 +65,19 @@ public class GUInterface {
             gbc.gridwidth = 1;
             gbc.insets = new Insets(4, 4, 4, 4);
 
+
+            /*gbc.gridwidth = 3;
+            gbc.fill = GridBagConstraints.NONE;
+            ImageIcon cardsdf = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\bg.png");
+            JLabel cfg1 = new JLabel(cardsdf);
+            add(cfg1, gbc);
+            gbc.fill = GridBagConstraints.BOTH;
+            gbc.gridwidth = 1;*/
+
             ImageIcon card = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\bell.png");
             JLabel c1 = new JLabel(card);
             add(c1, gbc);
+            //setComponentZOrder(c1, 0);
 
             spinnableThread th = new spinnableThread(c1, gbc, this);
             th.start();
@@ -96,25 +106,28 @@ public class GUInterface {
 
 
 
-            JButton jButton = new JButton("Add Coin");
 
 
-            add(jButton,gbc);
+            DregerButton bu1 = new DregerButton("Add Coin");
+
+            add(bu1,gbc);
             gbc.gridx++;
-            JButton jButton2 = new JButton("Bet One");
+            DregerButton jButton2 = new DregerButton("Bet One");
+
             add(jButton2,gbc);
             gbc.gridx++;
-            JButton jButton3 = new JButton("Bet Max");
+            DregerButton jButton3 = new DregerButton("Bet Max");
             add(jButton3,gbc);
 
             gbc.gridx = 0;
             gbc.gridy++;
             gbc.weightx = 0.5;
 
-            JButton jButton4 = new JButton("Spin");
+            DregerButton jButton4 = new DregerButton("Spin   ");
             add(jButton4,gbc);
             gbc.gridx++;
-            JButton jButton5 = new JButton("Reset");
+
+            DregerButton jButton5 = new DregerButton("Reset   ");
             add(jButton5,gbc);
 
 
