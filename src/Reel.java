@@ -10,7 +10,6 @@ public class Reel {
 
     public Reel(ArrayList<String> paths, ArrayList<Integer> values) {
 
-
         int count = paths.size();
 
         while (count > 0) {
