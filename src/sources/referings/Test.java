@@ -1,4 +1,4 @@
-/**
+package sources.referings; /**
  * Created by Thiloshon on 14-Dec-16.
  */
 import java.awt.Color;
@@ -12,9 +12,10 @@ import javax.swing.*;
 
 public class Test {
 
-    public static void main(String[] args) {
+    //todo main method
+    /*public static void main(String[] args) {
         new Test();
-    }
+    }*/
 
     public Test() {
         EventQueue.invokeLater(new Runnable() {
@@ -62,8 +63,8 @@ public class Test {
             values.add(7);
             values.add(1);
 
-            Reel reelly = new Reel(paths, values);
-            ArrayList <Symbol> reel = reelly.spin();
+            /*Reel reelly = new Reel(paths, values);
+            ArrayList <Symbol> reel = reelly.spin();*/
 
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
@@ -90,8 +91,8 @@ public class Test {
             gt.gridwidth = 2;
             gt.insets = new Insets(4, 4, 4, 4);
 
-            spinnableThread th = new spinnableThread(c1, gt, reel, this);
-            th.start();
+            //spinnableThread th = new spinnableThread(c1, gt, reel, this);
+            //th.start();
 
             gbc.gridx++;
             ImageIcon card2=new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\cherry.png");
@@ -187,7 +188,7 @@ public class Test {
 
     }
 
-    class spinnableThread extends Thread{
+    /*class spinnableThread extends Thread{
         JLabel jlabel;
         GridBagConstraints gbc;
         ArrayList<Symbol> reel;
@@ -244,7 +245,7 @@ public class Test {
 
 
         }
-    }
+    }*/
 
 }
 

@@ -1,4 +1,4 @@
-/**
+package sources.referings; /**
  * Created by Thiloshon on 14-Dec-16.
  */
 
@@ -37,14 +37,17 @@ public class CardLayoutExample extends JFrame implements ActionListener {
         card.next(c);
     }
 
-    public static void main(String[] args) {
-        /*CardLayoutExample cl = new CardLayoutExample();
+
+
+    //TODO main method
+    /*public static void main(String[] args) {
+        *//*CardLayoutExample cl = new CardLayoutExample();
         cl.setSize(400, 400);
         cl.setVisible(true);
-        cl.setDefaultCloseOperation(EXIT_ON_CLOSE);*/
+        cl.setDefaultCloseOperation(EXIT_ON_CLOSE);*//*
 
         new MyGridLayout();
-    }
+    }*/
 
     static class MyGridLayout {
         JFrame f;

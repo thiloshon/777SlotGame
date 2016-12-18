@@ -8,48 +8,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
-// DregerButton.java
-// Copyright Kyle Dreger 2012
-// To make JButtons suck less
-// https://gist.github.com/4646029
 
-public class DregerButton extends JButton implements MouseListener {
+public class CustomButton extends JButton implements MouseListener {
+    Color backgroundColor = Color.LIGHT_GRAY;
     Font defaultFont = new Font("Open Sans Light", Font.PLAIN, 14);
-    Color textColor = Color.black;
-    Color backgroundColor = Color.cyan;
     Color hoverColor = Color.decode("#00aced");
+    Color textColor = Color.black;
 
-    public DregerButton(String s) {
+
+    public CustomButton(String s) {
         s = s.toUpperCase();
-        this.setFocusPainted(false);
-        this.setText(s);
         this.setBorder(null);
         this.setForeground(textColor);
-        this.setBackground(backgroundColor);
-        this.setFont(defaultFont);
         this.setOpaque(true);
-
-        addMouseListener(this);
-    }
-
-    public DregerButton(String s, Color backgroundColor, Color hoverColor) {
-        s = s.toUpperCase();
         this.setFocusPainted(false);
-        this.setText(s);
-        this.setBorder(null);
-        this.setHoverColor(hoverColor);
         this.setBackground(backgroundColor);
         this.setFont(defaultFont);
-        this.setOpaque(true);
+        this.setText(s);
         addMouseListener(this);
-    }
-
-    public void setBackgroundColor(Color color) {
-        backgroundColor = color;
-    }
-
-    public void setHoverColor(Color color) {
-        hoverColor = color;
     }
 
     @Override

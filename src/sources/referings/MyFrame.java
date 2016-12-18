@@ -1,3 +1,5 @@
+package sources.referings;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -66,12 +68,14 @@ public class MyFrame extends javax.swing.JFrame {
         pack();   // calling pack() at the end, will ensure that every layout and size we just defined gets applied before the stuff becomes visible
     }
 
-    public static void main(String args[]) {
+    //todo main method
+
+    /*public static void main(String args[]) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new MyFrame().setVisible(true);
             }
         });
-    }
+    }*/
 }

@@ -2,12 +2,18 @@ import java.util.ArrayList;
 
 /**
  * Created by Thiloshon on 13-Dec-16.
+ *
+ * Modal Class
  */
 public class Reel {
 
-    ArrayList<Symbol> symbols = new ArrayList<>();
+    private ArrayList<Symbol> symbols = new ArrayList<>();
 
-
+    /**
+     *
+     * @param paths
+     * @param values
+     */
     public Reel(ArrayList<String> paths, ArrayList<Integer> values) {
 
         int count = paths.size();
@@ -28,16 +34,25 @@ public class Reel {
 
     }
 
-    boolean isInTheArray(int num){
+    /**
+     *
+     * @param num
+     * @return
+     */
+    private boolean isInTheArray(int num){
         for(Symbol s : symbols){
-            if (s.value==num){
+            if (s.getValue()==num){
                 return true;
             }
         }
         return false;
     }
 
-    ArrayList<Symbol> spin() {
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Symbol> spin() {
 
         ArrayList<Symbol> returnArray = new ArrayList<>();
         int no = (int) (Math.random() * 10 % 6);
@@ -50,5 +65,11 @@ public class Reel {
 
 
         return returnArray;
+    }
+
+    // Getters and Setters.
+
+    public ArrayList<Symbol> getSymbols() {
+        return symbols;
     }
 }
