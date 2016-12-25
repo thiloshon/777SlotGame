@@ -10,21 +10,20 @@ import java.awt.*;
 public class GUInterface {
     final private int INITIAL_CREDIT = 10;
 
-    private JLabel c1, c2, c3, creditLabel, bettingLabel;
+    private JLabel c1, c2, c3, creditLabel, bettingLabel, messageLabel;
     private GridBagConstraints gbc, gbc2, gbc3;
-    private TestPane testPane;
-    private CustomButton jButton1, jButton2, jButton3, jButton4, jButton5;
+    private GamePane gamePane;
+    private CustomButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6;
 
     public GUInterface() {
-        testPane = new TestPane();
-        Run(testPane);
+        gamePane = new GamePane();
+        Run(gamePane);
     }
 
     /**
-     *
      * @param tp
      */
-    void Run(TestPane tp) {
+    void Run(GamePane tp) {
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -46,8 +45,8 @@ public class GUInterface {
     /**
      *
      */
-    public class TestPane extends JPanel {
-        public TestPane() {
+    public class GamePane extends JPanel {
+        public GamePane() {
             setBackground(Color.DARK_GRAY);
             setLayout(new GridBagLayout());
 
@@ -99,10 +98,14 @@ public class GUInterface {
 
             jButton4 = new CustomButton("Spin");
             add(jButton4, gbc3);
-            gbc3.gridx++;
 
+            gbc3.gridx++;
             jButton5 = new CustomButton("Reset");
             add(jButton5, gbc3);
+
+            gbc3.gridx++;
+            jButton6 = new CustomButton("Statistics");
+            add(jButton6, gbc3);
 
             gbc3.gridy++;
             gbc3.gridx = 0;
@@ -110,8 +113,12 @@ public class GUInterface {
             add(creditLabel, gbc3);
 
             gbc3.gridx++;
-            bettingLabel = new JLabel("Betting: 0" );
+            bettingLabel = new JLabel("Betting: 0");
             add(bettingLabel, gbc3);
+
+            gbc3.gridx++;
+            messageLabel = new JLabel("Status: Playing");
+            add(messageLabel, gbc3);
         }
 
 
@@ -143,8 +150,8 @@ public class GUInterface {
         return c3;
     }
 
-    public TestPane getTestPane() {
-        return testPane;
+    public GamePane getGamePane() {
+        return gamePane;
     }
 
     public CustomButton getjButton1() {
@@ -167,12 +174,20 @@ public class GUInterface {
         return jButton5;
     }
 
+    public CustomButton getjButton6() {
+        return jButton6;
+    }
+
     public JLabel getBettingLabel() {
         return bettingLabel;
     }
 
     public JLabel getCreditLabel() {
         return creditLabel;
+    }
+
+    public JLabel getMessageLabel() {
+        return messageLabel;
     }
 }
 

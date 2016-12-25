@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
  * Created by Thiloshon on 17-Dec-16.
- *
+ * <p>
  * Controller Class
  */
 public class Controller {
@@ -18,16 +20,20 @@ public class Controller {
     private ArrayList<String> paths = new ArrayList<>();
     private ArrayList<Integer> values = new ArrayList<>();
     private ArrayList<Reel> reels = new ArrayList<>();
-    private  ArrayList<spinnableThread> threads = new ArrayList<>();
+    private ArrayList<spinnableThread> threads = new ArrayList<>();
     private int credit = INITIAL_CREDIT;
     private int bet = 0;
+    private int numberOfGames = 0;
+    private int numberOfWins = 0;
+    private int numberOfDraws = 0;
+    private int numberOfLosses = 0;
+    private ArrayList<Integer> reelValues = new ArrayList<>();
 
     private boolean check1 = true;
 
     GUInterface guInterface;
 
     /**
-     *
      * @param guInterface
      */
     public Controller(GUInterface guInterface) {
@@ -36,14 +42,20 @@ public class Controller {
         //run();
     }
 
+
     /**
      *
      */
-    void run(){
+    void run() {
 
+        JLabel messageLabel = guInterface.getMessageLabel();
+        final spinnableThread[] th = {null};
+        final spinnableThread[] th2 = {null};
+        final spinnableThread[] th3 = {null};
         JLabel c1 = guInterface.getC1();
         JLabel c2 = guInterface.getC2();
         JLabel c3 = guInterface.getC3();
+
         JLabel creditLabel = guInterface.getCreditLabel();
         JLabel bettingLabel = guInterface.getBettingLabel();
 
@@ -52,31 +64,52 @@ public class Controller {
         JButton jButton3 = guInterface.getjButton3();
         JButton jButton4 = guInterface.getjButton4();
         JButton jButton5 = guInterface.getjButton5();
+        JButton jButton6 = guInterface.getjButton6();
 
         //threads.add();
-        spinnableThread th = new spinnableThread(c1, guInterface.getGbc(), guInterface.getTestPane());
+
+
         c1.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e)
 
             {
-                System.out.println("hi");
-                th.check = false;
-                int value = th.getCurrent().getValue();
+                th[0].check = false;
+                reelValues.add(th[0].getCurrent().getValue());
 
-                //System.out.println("Setting False");
+                if (th2[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) {
+                    if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) {
+                        messageLabel.setText("You Won");
+                        numberOfWins++;
+                        int number = th[0].getCurrent().getValue();
+                        credit+=number*bet;
+                        bet=0;
+                        messageLabel.setText("You Won "+ number);
+                        bettingLabel.setText("Betting: " + bet);
+                        creditLabel.setText("Credits Left: " + credit);
+                    } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) {
+
+                        messageLabel.setText("Same values");
+                        numberOfDraws++;
+
+
+                    } else {
+                        messageLabel.setText("You Lost");
+                        numberOfLosses++;
+                        bet = 0;
+                        bettingLabel.setText("Betting: " + bet);
+                    }
+                    reelValues.clear();
+                    numberOfGames++;
+                }
+
+
+                int value = th[0].getCurrent().getValue();
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("hi");
-                try {
-                    th.wait();
 
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (IllegalMonitorStateException r) {
-
-                }
             }
 
             @Override
@@ -85,14 +118,7 @@ public class Controller {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                System.out.println("hi");
-                try {
-                    th.wait();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (IllegalMonitorStateException r) {
 
-                }
             }
 
             @Override
@@ -100,14 +126,39 @@ public class Controller {
             }
         });
 
-        spinnableThread th2 = new spinnableThread(c2, guInterface.getGbc2(), guInterface.getTestPane());
+
         c2.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e)
 
             {
-                //System.out.println("hi");
-                th2.check = false;
-                // System.out.println("Setting False");
+                th2[0].check = false;
+                reelValues.add(th2[0].getCurrent().getValue());
+
+                if (th[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) {
+
+                    if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) {
+                        numberOfWins++;
+                        int number = th2[0].getCurrent().getValue();
+                        credit+=number*bet;
+                        bet=0;
+                        messageLabel.setText("You Won "+ number);
+                        bettingLabel.setText("Betting: " + bet);
+                        creditLabel.setText("Credits Left: " + credit);
+                    } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) {
+                        numberOfDraws++;
+                        messageLabel.setText("Same values");
+
+                    } else {
+                        messageLabel.setText("You Lost");
+                        numberOfLosses++;
+                        bet = 0;
+                        bettingLabel.setText("Betting: " + bet);
+                    }
+                    numberOfGames++;
+                    reelValues.clear();
+                }
+
+
             }
 
             @Override
@@ -127,14 +178,38 @@ public class Controller {
             }
         });
 
-        spinnableThread th3 = new spinnableThread(c3, guInterface.getGbc3(), guInterface.getTestPane());
+
         c3.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e)
 
             {
-                //System.out.println("hi");
-                th3.check = false;
-                //System.out.println("Setting False");
+                th3[0].check = false;
+                reelValues.add(th3[0].getCurrent().getValue());
+
+                if (th2[0].getState().toString().equalsIgnoreCase("TERMINATED") && th[0].getState().toString().equalsIgnoreCase("TERMINATED")) {
+                    if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) {
+                        numberOfWins++;
+                        int number = th3[0].getCurrent().getValue();
+                        credit+=number*bet;
+                        bet=0;
+                        messageLabel.setText("You Won "+ number);
+                        bettingLabel.setText("Betting: " + bet);
+                        creditLabel.setText("Credits Left: " + credit);
+                    } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) {
+                        numberOfDraws++;
+                        messageLabel.setText("Same values");
+
+                    } else {
+                        numberOfLosses++;
+                        messageLabel.setText("You Lost");
+                        bet = 0;
+                        bettingLabel.setText("Betting: " + bet);
+                    }
+                    reelValues.clear();
+                    numberOfGames++;
+                }
+
+
             }
 
             @Override
@@ -154,14 +229,18 @@ public class Controller {
             }
         });
 
+
         jButton4.addActionListener(e -> {
-            th.check = true;
-            th2.check = true;
-            th3.check = true;
-            th.start();
-            th2.start();
-            th3.start();
+
+            messageLabel.setText("Status: Playing");
+            th[0] = new spinnableThread(c1, guInterface.getGbc(), guInterface.getGamePane(), paths, values);
+            th[0].start();
+            th2[0] = new spinnableThread(c2, guInterface.getGbc2(), guInterface.getGamePane(), paths, values);
+            th2[0].start();
+            th3[0] = new spinnableThread(c3, guInterface.getGbc3(), guInterface.getGamePane(), paths, values);
+            th3[0].start();
         });
+
 
         jButton1.addActionListener(e -> {
             credit++;
@@ -188,6 +267,14 @@ public class Controller {
             creditLabel.setText("Credits Left: " + credit);
             bettingLabel.setText("Betting: " + bet);
         });
+
+        jButton6.addActionListener(e -> {
+
+        });
+    }
+
+    void reelSpinning() {
+
     }
 
     /**
@@ -215,114 +302,4 @@ public class Controller {
     }
 
 
-    class IconPack {
-        ImageIcon icon;
-        Symbol symbol;
-
-        public IconPack(ImageIcon icon, Symbol symbol) {
-            this.icon = icon;
-            this.symbol = symbol;
-        }
-
-        public ImageIcon getIcon() {
-            return icon;
-        }
-
-        public Symbol getSymbol() {
-            return symbol;
-        }
-    }
-
-    class spinnableThread extends Thread {
-        JLabel jlabel;
-        GridBagConstraints gbc;
-        GUInterface.TestPane ts;
-        boolean check = true;
-        Symbol current;
-
-        public spinnableThread(JLabel jlabel, GridBagConstraints gbc, GUInterface.TestPane ts) {
-            this.gbc = gbc;
-            this.jlabel = jlabel;
-            this.ts = ts;
-        }
-
-        ArrayList<IconPack> iconPack = new ArrayList<>();
-
-        public Symbol getCurrent() {
-            return current;
-        }
-
-        /**
-         *
-         */
-        public void run() {
-            Reel reel = new Reel(paths, values);
-            for (Symbol symbol : reel.getSymbols()) {
-                iconPack.add(new IconPack(new ImageIcon(symbol.getImage()), symbol));
-                //todo simplify this mess
-            }
-
-            int no = 0;
-            for (int x = 0; check; x++) {
-                int sleepno = 10;
-                no = x % 6;
-
-                jlabel.setIcon(iconPack.get(no).getIcon());
-                jlabel.repaint();
-                current = iconPack.get(no).getSymbol();
-
-                ts.setComponentZOrder(jlabel, 0);
-                try {
-                    Thread.sleep(sleepno);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-
-        }
-    }
-
-
-    class spinThread extends Thread {
-        JLabel jlabel;
-        GridBagConstraints gbc;
-        GUInterface.TestPane ts;
-        Reel reel;
-
-        public spinThread(JLabel jlabel, Reel reel, GridBagConstraints gbc, GUInterface.TestPane ts) {
-            this.gbc = gbc;
-            this.jlabel = jlabel;
-            this.ts = ts;
-            this.reel = reel;
-        }
-
-        public void run() {
-            ArrayList<ImageIcon> icons = new ArrayList<>();
-            for (Symbol symbol : reel.getSymbols()) {
-                icons.add(new ImageIcon(symbol.getImage()));
-            }
-
-            JLabel label = new JLabel();
-            ts.add(label, gbc);
-
-            for (int x = 0; check1; x++) {
-                int num = x % 5;
-                label.setIcon(icons.get(num));
-                label.repaint();
-
-                ts.setComponentZOrder(label, 0);
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
-        }
-    }
 }
