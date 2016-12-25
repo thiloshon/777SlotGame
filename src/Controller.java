@@ -1,3 +1,5 @@
+import org.jfree.ui.RefineryUtilities;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -269,7 +271,10 @@ public class Controller {
         });
 
         jButton6.addActionListener(e -> {
-
+            PieChart_AWT demo = new PieChart_AWT( "Game Statistics" , numberOfWins, numberOfLosses, numberOfDraws);
+            demo.setSize( 560 , 367 );
+            RefineryUtilities.centerFrameOnScreen( demo );
+            demo.setVisible( true );
         });
     }
 
