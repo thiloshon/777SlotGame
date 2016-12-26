@@ -1,9 +1,10 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
  * Created by Thiloshon on 13-Dec-16.
- *
+ * <p>
  * The View of the Application
  * All the Visual Representation of the application comes here.
  * Contains an innerclass which is a custom container
@@ -23,6 +24,7 @@ public class GUInterface {
 
     /**
      * The method initiates the GUI and sets size and views it.
+     *
      * @param gamePane: An instance of the GamePane
      */
     void Run(GamePane gamePane) {
@@ -48,10 +50,11 @@ public class GUInterface {
     }
 
     /**
-     *  The Custom Container to hold Reel and similar components
-     *  Uses GridBagLayout
+     * The Custom Container to hold Reel and similar components
+     * Uses GridBagLayout
      */
     public class GamePane extends JPanel {
+
         public GamePane() {
             setBackground(Color.DARK_GRAY);
             setLayout(new GridBagLayout());
@@ -113,18 +116,30 @@ public class GUInterface {
             jButton6 = new CustomButton("Statistics");
             add(jButton6, gbc3);
 
+            Font defaultFont = new Font("Open Sans Light", Font.PLAIN, 17);
+
+
             gbc3.gridy++;
             gbc3.gridx = 0;
             creditLabel = new JLabel("Credits Left: " + INITIAL_CREDIT);
+            creditLabel.setForeground(Color.GRAY);
+            creditLabel.setFont(defaultFont);
+            
             add(creditLabel, gbc3);
 
             gbc3.gridx++;
             bettingLabel = new JLabel("Betting: 0");
+            bettingLabel.setForeground(Color.GRAY);
+            bettingLabel.setFont(defaultFont);
             add(bettingLabel, gbc3);
 
             gbc3.gridx++;
             messageLabel = new JLabel("Status: Playing");
+            messageLabel.setForeground(Color.WHITE);
+            messageLabel.setFont(defaultFont);
             add(messageLabel, gbc3);
+
+
         }
 
 

@@ -9,6 +9,7 @@ public class Symbol implements ISymbol {
 
     /**
      * The method to set image path
+     *
      * @param path The string path of the image
      */
     @Override

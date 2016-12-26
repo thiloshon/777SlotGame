@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Thiloshon on 13-Dec-16.
- *
+ * <p>
  * Modal Class
  * The Reel Model class contains 6 instances of Symbols and related methods.
  */
@@ -11,7 +11,8 @@ public class Reel {
     private ArrayList<Symbol> symbols = new ArrayList<>(); // contains the 6 Symbols of the Reel
 
     /**
-     *  Creates 6 instances of symbols and stores in a Arraylist
+     * Creates 6 instances of symbols and stores in a Arraylist
+     *
      * @param paths  The String paths of the images
      * @param values The int values of the value of symbol
      */
@@ -34,13 +35,14 @@ public class Reel {
     }
 
     /**
-     *  When populating randomly checking if a symbol is already in the Arraylist
+     * When populating randomly checking if a symbol is already in the Arraylist
+     *
      * @param num the value of the symbol that need validation
      * @return boolean value if its there in the reel or not.
      */
-    private boolean isInTheArray(int num){
-        for(Symbol s : symbols){
-            if (s.getValue()==num){
+    private boolean isInTheArray(int num) {
+        for (Symbol s : symbols) {
+            if (s.getValue() == num) {
                 return true;
             }
         }
@@ -48,7 +50,8 @@ public class Reel {
     }
 
     /**
-     *  Getting random ordering of the symbols in the reel
+     * Getting random ordering of the symbols in the reel
+     *
      * @return The arraylist with all six symbols in random indexes.
      */
     public ArrayList<Symbol> spin() {

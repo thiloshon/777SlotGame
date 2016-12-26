@@ -34,7 +34,6 @@ public class Controller {
 
     /**
      * @param guInterface Link a Gui Interface with Controller.
-     *                    <p>
      *                    calls method to initially populate all necessary data.
      */
     public Controller(GUInterface guInterface) {
@@ -235,12 +234,17 @@ public class Controller {
          */
         jButton4.addActionListener(e -> {
             messageLabel.setText("Status: Playing");
-            th[0] = new spinnableThread(c1, guInterface.getGbc(), guInterface.getGamePane(), paths, values);
-            th[0].start();
-            th2[0] = new spinnableThread(c2, guInterface.getGbc2(), guInterface.getGamePane(), paths, values);
-            th2[0].start();
-            th3[0] = new spinnableThread(c3, guInterface.getGbc3(), guInterface.getGamePane(), paths, values);
-            th3[0].start();
+            if (bet > 0) {
+                th[0] = new spinnableThread(c1, guInterface.getGbc(), guInterface.getGamePane(), paths, values);
+                th[0].start();
+                th2[0] = new spinnableThread(c2, guInterface.getGbc2(), guInterface.getGamePane(), paths, values);
+                th2[0].start();
+                th3[0] = new spinnableThread(c3, guInterface.getGbc3(), guInterface.getGamePane(), paths, values);
+                th3[0].start();
+            } else {
+                messageLabel.setText("Insufficient Bet Value");
+            }
+
         });
 
 
@@ -256,30 +260,45 @@ public class Controller {
          * Event Listener of "Bet One" Button. Increases bet value. Decreases credit value.
          */
         jButton2.addActionListener(e -> {
-            bet++;
-            bettingLabel.setText("Betting: " + bet);
-            credit--;
-            creditLabel.setText("Credits Left: " + credit);
+            if (credit > 0) {
+                bet++;
+                bettingLabel.setText("Betting: " + bet);
+                credit--;
+                creditLabel.setText("Credits Left: " + credit);
+            } else {
+                messageLabel.setText("Insufficient Credit Value");
+            }
+
         });
 
         /**
          * Event Listener of "Bet Max" Button. Increases bet value. Decreases credit value.
          */
         jButton3.addActionListener(e -> {
-            bet += MAX_VALUE;
-            credit -= MAX_VALUE;
-            creditLabel.setText("Credits Left: " + credit);
-            bettingLabel.setText("Betting: " + bet);
+            if (credit > 2) {
+                bet += MAX_VALUE;
+                credit -= MAX_VALUE;
+                creditLabel.setText("Credits Left: " + credit);
+                bettingLabel.setText("Betting: " + bet);
+            } else {
+                messageLabel.setText("Insufficient Credit Value");
+            }
+
         });
 
         /**
          * Event Listener of "Reset" Button. Increases credit value. Decreases bet value.
          */
         jButton5.addActionListener(e -> {
-            credit += bet;
-            bet = 0;
-            creditLabel.setText("Credits Left: " + credit);
-            bettingLabel.setText("Betting: " + bet);
+            if (bet > 0) {
+                credit += bet;
+                bet = 0;
+                creditLabel.setText("Credits Left: " + credit);
+                bettingLabel.setText("Betting: " + bet);
+            } else {
+                messageLabel.setText("Insufficient Bet Value");
+            }
+
         });
 
         /**

@@ -3,8 +3,6 @@
  */
 
 import javax.swing.*;
-
-import javafx.scene.control.TextArea;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -29,8 +27,8 @@ public class PieChart_AWT extends ApplicationFrame {
         this.credit = credit;
         setContentPane(createDemoPanel());
         this.add(jButton1);
-        nettedPerGame = (credit - 10)/(wins + loses);
-        txt.setText("     Netted per Game: "+  nettedPerGame);
+        nettedPerGame = (credit - 10) / (wins + loses);
+        txt.setText("     Netted per Game: " + nettedPerGame);
         this.add(txt);
     }
 
