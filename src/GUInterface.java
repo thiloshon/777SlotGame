@@ -124,7 +124,7 @@ public class GUInterface {
             creditLabel = new JLabel("Credits Left: " + INITIAL_CREDIT);
             creditLabel.setForeground(Color.GRAY);
             creditLabel.setFont(defaultFont);
-            
+            creditLabel.setPreferredSize(new Dimension(110, 24));
             add(creditLabel, gbc3);
 
             gbc3.gridx++;
@@ -137,6 +137,7 @@ public class GUInterface {
             messageLabel = new JLabel("Status: Playing");
             messageLabel.setForeground(Color.WHITE);
             messageLabel.setFont(defaultFont);
+            messageLabel.setPreferredSize(new Dimension(110, 24));
             add(messageLabel, gbc3);
 
 

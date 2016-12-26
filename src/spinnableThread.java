@@ -58,9 +58,8 @@ public class spinnableThread extends Thread {
         int no = 0; // to iterate through the Arraylist and get the symbol repeatedly.
 
         for (int x = 0; check; x++) {
-            int sleepno = 100; // The duration between consecutive Symbols
+            int sleepno = 10; // The duration between consecutive Symbols
             no = x % 6;
-
 
             Timer timer = new Timer(0, new ActionListener() {
                 @Override
@@ -81,6 +80,8 @@ public class spinnableThread extends Thread {
             timer.setRepeats(true);
             timer.setCoalesce(true);
             timer.start();
+
+
 
             jlabel.setIcon(iconPack.get(no).getIcon());
             jlabel.repaint();
