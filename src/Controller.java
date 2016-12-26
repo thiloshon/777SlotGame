@@ -86,7 +86,7 @@ public class Controller {
                         bettingLabel.setText("Betting: " + bet);
                         creditLabel.setText("Credits Left: " + credit);
                     } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
-                        messageLabel.setText("Same values");
+                        messageLabel.setText("Same Values");
                         numberOfDraws++; // doing nothing because of a re-spin
                     } else { // means no reels matched
                         messageLabel.setText("You Lost");
@@ -242,7 +242,7 @@ public class Controller {
                 th3[0] = new spinnableThread(c3, guInterface.getGbc3(), guInterface.getGamePane(), paths, values);
                 th3[0].start();
             } else {
-                messageLabel.setText("Insufficient Bet Value");
+                messageLabel.setText("Bet Value Not Set");
             }
 
         });
@@ -254,17 +254,20 @@ public class Controller {
         jButton1.addActionListener(e -> {
             credit++;
             creditLabel.setText("Credits Left: " + credit);
+            messageLabel.setText("Status: Playing");
         });
 
         /**
          * Event Listener of "Bet One" Button. Increases bet value. Decreases credit value.
          */
         jButton2.addActionListener(e -> {
+
             if (credit > 0) {
                 bet++;
                 bettingLabel.setText("Betting: " + bet);
                 credit--;
                 creditLabel.setText("Credits Left: " + credit);
+                messageLabel.setText("Status: Playing");
             } else {
                 messageLabel.setText("Insufficient Credit Value");
             }
@@ -280,6 +283,7 @@ public class Controller {
                 credit -= MAX_VALUE;
                 creditLabel.setText("Credits Left: " + credit);
                 bettingLabel.setText("Betting: " + bet);
+                messageLabel.setText("Status: Playing");
             } else {
                 messageLabel.setText("Insufficient Credit Value");
             }
@@ -295,8 +299,9 @@ public class Controller {
                 bet = 0;
                 creditLabel.setText("Credits Left: " + credit);
                 bettingLabel.setText("Betting: " + bet);
+                messageLabel.setText("Status: Playing");
             } else {
-                messageLabel.setText("Insufficient Bet Value");
+                messageLabel.setText("No Bet Value to Reset");
             }
 
         });
