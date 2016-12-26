@@ -4,6 +4,7 @@
 
 import javax.swing.*;
 
+import javafx.scene.control.TextArea;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,15 +16,22 @@ public class PieChart_AWT extends ApplicationFrame {
     static int wins = 0;
     static int loses = 0;
     static int draws = 0;
+    static int credit = 0;
     JButton jButton1 = new CustomButton("Save Statistics");
+    JLabel txt = new JLabel();
+    int nettedPerGame;
 
-    public PieChart_AWT(String title, int wins, int loses, int draws) {
+    public PieChart_AWT(String title, int wins, int loses, int draws, int credit) {
         super(title);
         this.draws = draws;
         this.wins = wins;
         this.loses = loses;
+        this.credit = credit;
         setContentPane(createDemoPanel());
         this.add(jButton1);
+        nettedPerGame = (credit - 10)/(wins + loses);
+        txt.setText("     Netted per Game: "+  nettedPerGame);
+        this.add(txt);
     }
 
     private static PieDataset createDataset(int wins, int loses, int draws) {
@@ -51,11 +59,4 @@ public class PieChart_AWT extends ApplicationFrame {
         JFreeChart chart = createChart(createDataset(wins, loses, draws));
         return new ChartPanel(chart);
     }
-
-
-
-    /*public static void main( String[ ] args )
-    {
-
-    }*/
 }

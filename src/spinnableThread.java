@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Thiloshon on 25-Dec-16.
+ *
+ * The Thread for managing three Reels at the same time
  */
 public class spinnableThread extends Thread {
     JLabel jlabel;
@@ -14,6 +16,15 @@ public class spinnableThread extends Thread {
     private ArrayList<String> paths;
     private ArrayList<Integer> values;
 
+    /**
+     * Gets references of view components needed for thread manipulation
+     *
+     * @param jlabel The JLabel related with the Reel.
+     * @param gbc The GridBagConstraint associated with the reel in GridBagLayout.
+     * @param ts The GamePane that holds all the components.
+     * @param paths The Arraylist with all the image paths
+     * @param values The Arraylist with the values of the symbols
+     */
     public spinnableThread(JLabel jlabel, GridBagConstraints gbc, GUInterface.GamePane ts, ArrayList<String> paths, ArrayList<Integer> values) {
         this.gbc = gbc;
         this.jlabel = jlabel;
@@ -24,25 +35,27 @@ public class spinnableThread extends Thread {
 
     ArrayList<IconPack> iconPack = new ArrayList<>();
 
+    /**
+     * The method to return the symbol which was stopped by the gamer.
+     * @return The symbol Stopped by the gamer.
+     */
     public Symbol getCurrent() {
         return current;
     }
 
     /**
-     *
+     *  The main Thread Logic
      */
     public void run() {
         Reel reel = new Reel(paths, values);
         for (Symbol symbol : reel.getSymbols()) {
             iconPack.add(new IconPack(new ImageIcon(symbol.getImage()), symbol));
-            //todo simplify this mess
         }
 
-        int no = 0;
+        int no = 0; // to iterate through the Arraylist and get the symbol repeatedly.
 
-        System.out.println(check);
         for (int x = 0; check; x++) {
-            int sleepno = 10;
+            int sleepno = 10; // The duration between consecutive Symbols
             no = x % 6;
 
             jlabel.setIcon(iconPack.get(no).getIcon());
@@ -58,6 +71,9 @@ public class spinnableThread extends Thread {
         }
     }
 
+    /**
+     * Just a data struct to hold imageIcon and Symbol
+     */
     class IconPack {
         ImageIcon icon;
         Symbol symbol;
