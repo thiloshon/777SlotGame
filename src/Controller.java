@@ -1,16 +1,13 @@
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
  * Created by Thiloshon on 17-Dec-16.
- *
+ * <p>
  * Controller Class
  * Links view and modal.
  * Has all the event listeners and other logic.
@@ -36,10 +33,9 @@ public class Controller {
     GUInterface guInterface;
 
     /**
-     * @param guInterface
-     * Link a Gui Interface with Controller.
-     *
-     * calls method to initially populate all necessary data.
+     * @param guInterface Link a Gui Interface with Controller.
+     *                    <p>
+     *                    calls method to initially populate all necessary data.
      */
     public Controller(GUInterface guInterface) {
         this.guInterface = guInterface;
@@ -48,7 +44,7 @@ public class Controller {
 
 
     /**
-     *  Gets all the references of components in the view and manages event listeners
+     * Gets all the references of components in the view and manages event listeners
      */
     void run() {
 
@@ -85,9 +81,9 @@ public class Controller {
                     if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
                         numberOfWins++;
                         int number = th[0].getCurrent().getValue();
-                        credit+=number*bet;
-                        bet=0;
-                        messageLabel.setText("You Won "+ number +" Credits");
+                        credit += number * bet;
+                        bet = 0;
+                        messageLabel.setText("You Won " + number + " Credits");
                         bettingLabel.setText("Betting: " + bet);
                         creditLabel.setText("Credits Left: " + credit);
                     } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
@@ -102,7 +98,6 @@ public class Controller {
                     reelValues.clear(); // clearing the arraylist which keeps track of three reels at the end of game
                     numberOfGames++;
                 }
-
 
 
             }
@@ -141,9 +136,9 @@ public class Controller {
                     if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
                         numberOfWins++;
                         int number = th2[0].getCurrent().getValue();
-                        credit+=number*bet;
-                        bet=0;
-                        messageLabel.setText("You Won "+ number);
+                        credit += number * bet;
+                        bet = 0;
+                        messageLabel.setText("You Won " + number);
                         bettingLabel.setText("Betting: " + bet);
                         creditLabel.setText("Credits Left: " + credit);
                     } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
@@ -195,9 +190,9 @@ public class Controller {
                     if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
                         numberOfWins++;
                         int number = th3[0].getCurrent().getValue();
-                        credit+=number*bet;
-                        bet=0;
-                        messageLabel.setText("You Won "+ number);
+                        credit += number * bet;
+                        bet = 0;
+                        messageLabel.setText("You Won " + number);
                         bettingLabel.setText("Betting: " + bet);
                         creditLabel.setText("Credits Left: " + credit);
                     } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
@@ -291,15 +286,15 @@ public class Controller {
          * Event Listener of "Statistics" Button. Creates a new window with statistics.
          */
         jButton6.addActionListener(e -> {
-            PieChart_AWT demo = new PieChart_AWT( "Game Statistics" , numberOfWins, numberOfLosses, numberOfDraws, credit);
-            demo.setSize( 560 , 367 );
-            RefineryUtilities.centerFrameOnScreen( demo );
-            demo.setVisible( true );
+            PieChart_AWT demo = new PieChart_AWT("Game Statistics", numberOfWins, numberOfLosses, numberOfDraws, credit);
+            demo.setSize(560, 367);
+            RefineryUtilities.centerFrameOnScreen(demo);
+            demo.setVisible(true);
         });
     }
 
     /**
-     *  The method to populate all data about image paths and values assigned to each symbol
+     * The method to populate all data about image paths and values assigned to each symbol
      */
     void addSources() {
         paths.add("src\\sources\\images\\bell.png");
