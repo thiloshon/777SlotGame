@@ -3,12 +3,13 @@ import java.awt.*;
 
 /**
  * Created by Thiloshon on 13-Dec-16.
- * <p>
+ *
  * The View of the Application
- * Reusable
+ * All the Visual Representation of the application comes here.
+ * Contains an innerclass which is a custom container
  */
 public class GUInterface {
-    final private int INITIAL_CREDIT = 10;
+    final private int INITIAL_CREDIT = 10; // The number of credits given at the beginning of the game
 
     private JLabel c1, c2, c3, creditLabel, bettingLabel, messageLabel;
     private GridBagConstraints gbc, gbc2, gbc3;
@@ -21,9 +22,10 @@ public class GUInterface {
     }
 
     /**
-     * @param tp
+     * The method initiates the GUI and sets size and views it.
+     * @param gamePane: An instance of the GamePane
      */
-    void Run(GamePane tp) {
+    void Run(GamePane gamePane) {
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -33,9 +35,12 @@ public class GUInterface {
 
             JFrame frame = new JFrame("777 Slot Game");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(tp);
+            frame.add(gamePane);
             frame.pack();
             frame.setSize(1000, 700);
+            Dimension dm = new Dimension(); // The minimum frame size dimension
+            dm.setSize(500, 370);
+            frame.setMinimumSize(dm);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
 
@@ -43,7 +48,8 @@ public class GUInterface {
     }
 
     /**
-     *
+     *  The Custom Container to hold Reel and similar components
+     *  Uses GridBagLayout
      */
     public class GamePane extends JPanel {
         public GamePane() {
@@ -59,19 +65,19 @@ public class GUInterface {
             gbc.gridwidth = 1;
             gbc.insets = new Insets(4, 4, 4, 4);
 
-            ImageIcon card = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\bell.png");
+            ImageIcon card = new ImageIcon("src\\sources\\images\\bell.png");
             c1 = new JLabel(card);
             add(c1, gbc);
 
             gbc2 = gbc;
             gbc2.gridx++;
-            ImageIcon card2 = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\cherry.png");
+            ImageIcon card2 = new ImageIcon("src\\sources\\images\\cherry.png");
             c2 = new JLabel(card2);
             add(c2, gbc2);
 
             gbc3 = gbc2;
             gbc3.gridx++;
-            ImageIcon card3 = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\lemon.png");
+            ImageIcon card3 = new ImageIcon("src\\sources\\images\\lemon.png");
             c3 = new JLabel(card3);
             add(c3, gbc3);
 
@@ -190,39 +196,3 @@ public class GUInterface {
         return messageLabel;
     }
 }
-
-
-
-
-    /*JFrame f = new JFrame();//creating instance of JFrame
-
-    JButton b = new JButton("click");//creating instance of JButton
-b.setBounds(130, 100, 100, 40);//x axis, y axis, width, height
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //f.add(b);//adding button in JFrame
-
-
-
-
-        try {
-        BufferedImage img = ImageIO.read(new File("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\bell.png"));
-        ImageIcon icon = new ImageIcon(img);
-        JLabel label = new JLabel(icon);
-        f.add(label);
-        //JOptionPane.showMessageDialog(null, label);
-        } catch (IOException e) {
-        e.printStackTrace();
-        }
-
-        f.setSize(400, 500);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible*/
-
-/*gbc.gridwidth = 3;
-            gbc.fill = GridBagConstraints.NONE;
-            ImageIcon cardsdf = new ImageIcon("C:\\Users\\Thiloshon\\IdeaProjects\\777 Slot Game\\src\\sources\\images\\bg.png");
-            JLabel cfg1 = new JLabel(cardsdf);
-            add(cfg1, gbc);
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.gridwidth = 1;*/

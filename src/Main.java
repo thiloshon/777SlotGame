@@ -1,7 +1,7 @@
 /**
  * Created by Thiloshon on 12-Dec-16.
  *
- * Glue Class
+ * Main Class : Execution of Application
  */
 public class Main {
 

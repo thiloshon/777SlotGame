@@ -8,13 +8,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
-
+/**
+ * A custom Button which is more stylish than the native
+ */
 public class CustomButton extends JButton implements MouseListener {
     Color backgroundColor = Color.LIGHT_GRAY;
     Font defaultFont = new Font("Open Sans Light", Font.PLAIN, 14);
     Color hoverColor = Color.decode("#00aced");
     Color textColor = Color.black;
-
 
     public CustomButton(String s) {
         s = s.toUpperCase();
