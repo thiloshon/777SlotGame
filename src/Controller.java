@@ -244,7 +244,6 @@ public class Controller {
             } else {
                 messageLabel.setText("Bet Value Not Set");
             }
-
         });
 
 
