@@ -69,19 +69,14 @@ public class spinnableThread extends Thread {
                         if (y + jlabel.getHeight() > jlabel.getHeight()*1.3) {
                             y-=jlabel.getHeight()/2;
                         }
-
                         jlabel.setBounds(jlabel.getX(), y, jlabel.getWidth(), jlabel.getHeight());
                         jlabel.repaint();
                     }
-
                 }
-
             });
             timer.setRepeats(true);
             timer.setCoalesce(true);
             timer.start();
-
-
 
             jlabel.setIcon(iconPack.get(no).getIcon());
             jlabel.repaint();
@@ -95,6 +90,7 @@ public class spinnableThread extends Thread {
             }
         }
     }
+
 
     /**
      * Just a data struct to hold imageIcon and Symbol

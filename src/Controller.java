@@ -46,7 +46,6 @@ public class Controller {
      * Gets all the references of components in the view and manages event listeners
      */
     void run() {
-
         JLabel c1 = guInterface.getC1();
         JLabel c2 = guInterface.getC2();
         JLabel c3 = guInterface.getC3();
@@ -66,6 +65,7 @@ public class Controller {
         final spinnableThread[] th2 = {null};
         final spinnableThread[] th3 = {null};
 
+
         /**
          * Event Listener of first Reel. Contains all the logic.
          */
@@ -73,32 +73,36 @@ public class Controller {
             public void mouseClicked(MouseEvent e)
 
             {
-                th[0].check = false;
-                reelValues.add(th[0].getCurrent().getValue()); // having record of the tree reels spun in a game
+                try {
+                    if (th != null && th.length > 0 && th2 != null && th2.length > 0 && th3 != null && th3.length > 0) {
+                        th[0].check = false;
+                        reelValues.add(th[0].getCurrent().getValue()); // having record of the tree reels spun in a game
 
-                if (th2[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) { // checking if this is the last reel to be clicked
-                    if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
-                        numberOfWins++;
-                        int number = th[0].getCurrent().getValue();
-                        credit += number * bet;
-                        bet = 0;
-                        messageLabel.setText("You Won " + number + " Credits");
-                        bettingLabel.setText("Betting: " + bet);
-                        creditLabel.setText("Credits Left: " + credit);
-                    } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
-                        messageLabel.setText("Same Values");
-                        numberOfDraws++; // doing nothing because of a re-spin
-                    } else { // means no reels matched
-                        messageLabel.setText("You Lost");
-                        numberOfLosses++;
-                        bet = 0;
-                        bettingLabel.setText("Betting: " + bet);
+                        if (th2[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) { // checking if this is the last reel to be clicked
+                            if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
+                                numberOfWins++;
+                                int number = th[0].getCurrent().getValue();
+                                credit += number * bet;
+                                bet = 0;
+                                messageLabel.setText("You Won " + number + " Credits");
+                                bettingLabel.setText("Betting: " + bet);
+                                creditLabel.setText("Credits Left: " + credit);
+                            } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
+                                messageLabel.setText("Same Values");
+                                numberOfDraws++; // doing nothing because of a re-spin
+                            } else { // means no reels matched
+                                messageLabel.setText("You Lost");
+                                numberOfLosses++;
+                                bet = 0;
+                                bettingLabel.setText("Betting: " + bet);
+                            }
+                            reelValues.clear(); // clearing the arraylist which keeps track of three reels at the end of game
+                            numberOfGames++;
+                        }
                     }
-                    reelValues.clear(); // clearing the arraylist which keeps track of three reels at the end of game
-                    numberOfGames++;
+                } catch (NullPointerException e1) {
+                    System.out.println("Thread not initiated yet: Possible remedy: Click Spin First");
                 }
-
-
             }
 
             @Override
@@ -124,37 +128,43 @@ public class Controller {
          * Event Listener of second Reel. Contains all the logic.
          */
         c2.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e)
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    th2[0].check = false;
+                    if (th != null && th.length > 0 && th2 != null && th2.length > 0 && th3 != null && th3.length > 0) {
+                        reelValues.add(th2[0].getCurrent().getValue()); // having record of the tree reels spun in a game
 
-            {
-                th2[0].check = false;
-                reelValues.add(th2[0].getCurrent().getValue()); // having record of the tree reels spun in a game
+                        if (th[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) { // checking if this is the last reel to be clicked
 
-                if (th[0].getState().toString().equalsIgnoreCase("TERMINATED") && th3[0].getState().toString().equalsIgnoreCase("TERMINATED")) { // checking if this is the last reel to be clicked
+                            if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
+                                numberOfWins++;
+                                int number = th2[0].getCurrent().getValue();
+                                credit += number * bet;
+                                bet = 0;
+                                messageLabel.setText("You Won " + number);
+                                bettingLabel.setText("Betting: " + bet);
+                                creditLabel.setText("Credits Left: " + credit);
+                            } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
+                                numberOfDraws++;
+                                messageLabel.setText("Same values");
 
-                    if (reelValues.get(0) == reelValues.get(1) && reelValues.get(1) == reelValues.get(2)) { //checking if all three reels are of same value
-                        numberOfWins++;
-                        int number = th2[0].getCurrent().getValue();
-                        credit += number * bet;
-                        bet = 0;
-                        messageLabel.setText("You Won " + number);
-                        bettingLabel.setText("Betting: " + bet);
-                        creditLabel.setText("Credits Left: " + credit);
-                    } else if (reelValues.get(0) == reelValues.get(1) || reelValues.get(0) == reelValues.get(2) || reelValues.get(2) == reelValues.get(1)) { // checking if any two reels are of same value
-                        numberOfDraws++;
-                        messageLabel.setText("Same values");
-
-                    } else {
-                        messageLabel.setText("You Lost");
-                        numberOfLosses++;
-                        bet = 0;
-                        bettingLabel.setText("Betting: " + bet);
+                            } else {
+                                messageLabel.setText("You Lost");
+                                numberOfLosses++;
+                                bet = 0;
+                                bettingLabel.setText("Betting: " + bet);
+                            }
+                            numberOfGames++;
+                            reelValues.clear(); // clearing the arraylist which keeps track of three reels at the end of game
+                        }
                     }
-                    numberOfGames++;
-                    reelValues.clear(); // clearing the arraylist which keeps track of three reels at the end of game
+                } catch (IndexOutOfBoundsException ex) {
+                    System.out.println("Array Index exceeded. Possible remedy: Spin The Reel First To Stop The Reel" + ex.getMessage());
+                } catch (NullPointerException ex) {
+                    System.out.println("Array Index exceeded. Possible remedy: Spin The Reel First To Stop The Reel");
+                } catch (Exception ex) {
+                    System.out.println("Array Index exceeded. Possible remedy: Spin The Reel First To Stop The Reel");
                 }
-
-
             }
 
             @Override
@@ -256,11 +266,11 @@ public class Controller {
             messageLabel.setText("Status: Playing");
         });
 
+
         /**
          * Event Listener of "Bet One" Button. Increases bet value. Decreases credit value.
          */
         jButton2.addActionListener(e -> {
-
             if (credit > 0) {
                 bet++;
                 bettingLabel.setText("Betting: " + bet);
@@ -270,8 +280,8 @@ public class Controller {
             } else {
                 messageLabel.setText("Insufficient Credit Value");
             }
-
         });
+
 
         /**
          * Event Listener of "Bet Max" Button. Increases bet value. Decreases credit value.
@@ -286,8 +296,8 @@ public class Controller {
             } else {
                 messageLabel.setText("Insufficient Credit Value");
             }
-
         });
+
 
         /**
          * Event Listener of "Reset" Button. Increases credit value. Decreases bet value.
@@ -302,8 +312,8 @@ public class Controller {
             } else {
                 messageLabel.setText("No Bet Value to Reset");
             }
-
         });
+
 
         /**
          * Event Listener of "Statistics" Button. Creates a new window with statistics.

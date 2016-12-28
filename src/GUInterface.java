@@ -44,7 +44,6 @@ public class GUInterface {
             frame.setMinimumSize(dm);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-
         });
     }
 
@@ -53,7 +52,6 @@ public class GUInterface {
      * Uses GridBagLayout
      */
     public class GamePane extends JPanel {
-
         public GamePane() {
             setBackground(Color.DARK_GRAY);
             setLayout(new GridBagLayout());
@@ -117,7 +115,6 @@ public class GUInterface {
 
             Font defaultFont = new Font("Open Sans Light", Font.PLAIN, 17);
 
-
             gbc3.gridy++;
             gbc3.gridx = 0;
             creditLabel = new JLabel("Credits Left: " + INITIAL_CREDIT);
@@ -138,11 +135,7 @@ public class GUInterface {
             messageLabel.setFont(defaultFont);
             messageLabel.setPreferredSize(new Dimension(110, 24));
             add(messageLabel, gbc3);
-
-
         }
-
-
     }
 
     // Getters and Setters of components
