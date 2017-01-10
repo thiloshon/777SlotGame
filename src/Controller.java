@@ -322,6 +322,7 @@ public class Controller {
             PieChart_AWT demo = new PieChart_AWT("Game Statistics", numberOfWins, numberOfLosses, numberOfDraws, credit);
             demo.setSize(560, 367);
             RefineryUtilities.centerFrameOnScreen(demo);
+            demo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             demo.setVisible(true);
         });
     }
